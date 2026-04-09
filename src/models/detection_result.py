@@ -1,7 +1,6 @@
 """
 detection_result.py
-Містить структуру результату обробки одного кадру CV-модулем.
-Створюється після обробки FramePacket та передається далі в модулі геометрії, логіки або керування.
+Contains results structure
 """
 
 from dataclasses import dataclass
@@ -11,32 +10,26 @@ import numpy as np
 
 @dataclass
 class DetectionResult:
-    # Номер кадру, для якого отримано цей результат.
-    # Потрібен, щоб пов’язати результат обробки з конкретним FramePacket.
+    # Frame identifier (links result to a specific FramePacket).
     frame_id: int
 
-    # Час кадру, по якому був отриманий результат.
-    # Зазвичай копіюється з FramePacket.timestamp.
+    # Timestamp of the processed frame.
     timestamp: float
 
-    # Прапорець наявності цільового об’єкта.
-    # True  -> об’єкт знайдено
-    # False -> об’єкт не знайдено
+    # Whether the target object was detected.
     target_found: bool
 
-    # Опорна точка об’єкта в пікселях.
-    # Це основна точка, з якою далі працює геометричний модуль.
-    # Якщо об’єкт не знайдено, значення None.
+    # Representative object point in pixel coordinates (cx, cy).
     support_point_px: Optional[Tuple[int, int]] = None
 
-    # Обмежувальний прямокутник об’єкта у форматі (x, y, w, h).
-    # Використовується для відладки, візуалізації та простих евристик.
+    # Object position in world coordinates (meters), Z = 0.
+    world_coords: Optional[Tuple[float, float, float]] = None
+
+    # Bounding box (x, y, w, h).
     bbox: Optional[Tuple[int, int, int, int]] = None
 
-    # Бінарна маска об’єкта.
-    # Потрібна, якщо CV-модуль явно виділяє область цільового об’єкта.
+    # Binary segmentation mask.
     mask: Optional[np.ndarray] = None
 
-    # Відладочне зображення з накладеними результатами обробки:
-    # прямокутником, маскою, точкою, підписами тощо.
+    # Debug image with overlays (bbox, mask, point, labels).
     debug_image: Optional[np.ndarray] = None

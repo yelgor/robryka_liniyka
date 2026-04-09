@@ -17,5 +17,5 @@ class FramePacket:
     image: np.ndarray
 
     # timestamp of image
-    # Потрібен для контролю свіжості кадру та відладки таймінгів.
+    # needed to control frames freshness
     timestamp: float
