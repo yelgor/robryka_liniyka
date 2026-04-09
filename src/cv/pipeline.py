@@ -109,7 +109,7 @@ class CVPipeline:
                 debug_image, coordinate_label,
                 (centre_x + 10, centre_y - 10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.45,
-                (0, 255, 255), 1, cv2.LINE_AA,
+                (255, 0, ), 1, cv2.LINE_AA,
             )
 
         return DetectionResult(
