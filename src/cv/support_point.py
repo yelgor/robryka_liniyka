@@ -24,3 +24,5 @@ def find_support_point(
     """
 
     return None
+
+

@@ -1,7 +1,7 @@
 """
 frame_packet.py
-Містить структуру вхідних даних для CV-модуля.
-Створюється на стороні камери робота та передається далі в pipeline CV-модуля.
+It contains input data for CV-module,
+is created by camera module and transfered to CV pipeline.
 """
 
 from dataclasses import dataclass
@@ -10,13 +10,12 @@ import numpy as np
 
 @dataclass
 class FramePacket:
-    # Унікальний номер кадру.
-    # Потрібен, щоб розуміти, який саме кадр зараз обробляється.
+    # Unique frame ID (to understand which frame is in process)
     frame_id: int
 
-    # Саме зображення, з яким далі працює CV-модуль.
+    # Image that will be processed
     image: np.ndarray
 
-    # Час отримання кадру.
+    # timestamp of image
     # Потрібен для контролю свіжості кадру та відладки таймінгів.
     timestamp: float
